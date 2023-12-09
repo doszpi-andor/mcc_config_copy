@@ -1,3 +1,4 @@
+from os.path import split
 from tkinter.filedialog import askopenfilename, askdirectory
 from tkinter.messagebox import showerror
 
@@ -34,6 +35,17 @@ def read_mplab_project_path():
         raise OpenMplabProjectException
 
 
+def mplab_project_name(mplab_project_path):
+    if  mplab_project_path != '' and mplab_project_path[-1] == 'X':
+        project_folder = str(split(mplab_project_path)[-1])
+        print(project_folder)
+        project_name = project_folder.split('.')[0]
+        print(project_name)
+        return project_name
+    else:
+        raise OpenMplabProjectException
+
+
 if __name__ == '__main__':
     try:
         mcc_file = read_mcc_file_path()
@@ -46,3 +58,4 @@ if __name__ == '__main__':
     except OpenMplabProjectException:
         showerror('Error', 'Folder is not MPLAB X Project')
         quit()
+
