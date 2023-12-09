@@ -8,3 +8,5 @@ Instructions:
 4. Run mcc_config_copy.py
 5. Open the MCC, change the configuration (if necessary)
 6. Run the "Create" function
+
+(Only for Windows operating system)
