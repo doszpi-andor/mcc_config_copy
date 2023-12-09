@@ -1,1 +1,2 @@
-# mcc_config_copy
+# MCC config copy
+Copy Microchip Code Configurator basic configurations between projects.
