@@ -1,6 +1,7 @@
 from os.path import split, isfile
+from shutil import copy
 from tkinter.filedialog import askopenfilename, askdirectory
-from tkinter.messagebox import showerror
+from tkinter.messagebox import showerror, showinfo, showwarning
 
 
 class OpenMccFileException(Exception):
@@ -38,7 +39,7 @@ def read_mplab_project_path():
 def mplab_project_name(mplab_project_path):
     if  mplab_project_path != '' and mplab_project_path[-1] == 'X':
         project_folder = str(split(mplab_project_path)[-1])
-        project_name = project_folder.split('.')[0]
+        project_name = str(project_folder.split('.')[0])
         return project_name
     else:
         raise OpenMplabProjectException
@@ -63,3 +64,9 @@ if __name__ == '__main__':
     except OpenMplabProjectException:
         showerror('Error', 'Folder is not MPLAB X Project')
         quit()
+
+    if is_mcc_file_in_project(mplab_project):
+        copy(mcc_file, mplab_project + '/' + mplab_project_name(mplab_project) + '.mc3')
+        showinfo('OK', 'MCC file copy ready')
+    else:
+        showwarning('Error', 'Running MCC first!')
