@@ -34,5 +34,15 @@ def read_mplab_project_path():
         raise OpenMplabProjectException
 
 
-read_mcc_file_path()
-read_mplab_project_path()
+if __name__ == '__main__':
+    try:
+        mcc_file = read_mcc_file_path()
+    except OpenMccFileException:
+        showerror('Error', 'File is not MCC file')
+        quit()
+
+    try:
+        mplab_project = read_mplab_project_path()
+    except OpenMplabProjectException:
+        showerror('Error', 'Folder is not MPLAB X Project')
+        quit()
