@@ -1,4 +1,5 @@
 from os.path import split, isfile
+from pathlib import Path
 from shutil import copy
 from tkinter.filedialog import askopenfilename, askdirectory
 from tkinter.messagebox import showerror, showinfo, showwarning
@@ -27,8 +28,23 @@ def read_mcc_file_path():
         raise OpenMccFileException
 
 
+def read_mplab_default_path():
+    try:
+        mplab_properties = str(Path.home()) + '\\AppData\\Roaming\\mplab_ide\\dev\\v6.00\\config\\Preferences.properties'
+
+        with open(mplab_properties, 'r', encoding='utf-8') as read_file:
+            lines = [line for line in read_file]
+        for line in lines:
+            if line[0:22] == 'MPLAB_PROJECTS_FOLDER=':
+                return str(line[22:-1])
+    except FileNotFoundError:
+        return '.'
+
+    return '.'
+
+
 def read_mplab_project_path():
-    project = askdirectory()
+    project = askdirectory(initialdir=read_mplab_default_path())
 
     if project != '' and project[-1] == 'X':
         return project
