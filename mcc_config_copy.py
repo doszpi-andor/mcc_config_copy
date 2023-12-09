@@ -19,10 +19,10 @@ class OpenMplabProjectException(Exception):
 def read_mcc_file_path():
     mcc_file = askopenfilename(filetypes=[("MCC file", "*.mc3")], initialdir='.')
 
-    if mcc_file.split('.')[-1] != 'mc3':
+    if mcc_file.split('.')[-1] == 'mc3':
+        return mcc_file
+    else:
         raise OpenMccFileException
-
-    return mcc_file
 
 
 def read_mplab_project_path():
@@ -32,3 +32,7 @@ def read_mplab_project_path():
         return project
     else:
         raise OpenMplabProjectException
+
+
+read_mcc_file_path()
+read_mplab_project_path()
