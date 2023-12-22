@@ -53,9 +53,9 @@ def read_mplab_project_path():
 
 
 def mplab_project_name(mplab_project_path):
-    if  mplab_project_path != '' and mplab_project_path[-1] == 'X':
+    if mplab_project_path != '' and mplab_project_path[-1] == 'X':
         project_folder = str(split(mplab_project_path)[-1])
-        project_name = str(project_folder.split('.')[0])
+        project_name = str(project_folder[:-2])
         return project_name
     else:
         raise OpenMplabProjectException
